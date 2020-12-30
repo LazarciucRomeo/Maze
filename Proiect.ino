@@ -17,12 +17,39 @@ int range = 12;
 int center = range / 2;
 int threshold = range / 4;
 
+int yPosition[] = {
+  100,
+  100,
+  150,
+  120,
+  170,
+  130,
+  130,
+  80,
+  150,
+  150
+}; //initializing the y axle for autonomous function
+int xPosition[] = {
+  40,
+  10,
+  20,
+  70,
+  0,
+  20,
+  60,
+  20,
+  20,
+  60
+
+}; //initializing the x axle for autonomous function
+
 int readAxis(int thisAxis);
 void controlServo(int ReadJoystickX, int ReadJoystickY);
+void autonomous();
 
 void setup() {
   Serial.begin(9600); //Begin Serial monitor of arduino ide
- 
+
 
   ServoForX.attach(InputServoX);
   ServoForY.attach(InputServoY);
@@ -87,5 +114,14 @@ void controlServo(int ReadJoystickX, int ReadJoystickY) {
   }
   if (CurrentYPosition < YStartPosition - 20) {
     CurrentYPosition = YStartPosition - 20;
+  }
+}
+void autonomous() {
+
+  for (int i = 0; i < 10; i++) {
+
+    ServoForX.write(xPosition[i]);
+    ServoForY.write(yPosition[i]);
+    delay(2000);
   }
 }
